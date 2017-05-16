@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import {Transaction} from '../../database';
+
+
 /**
  * Generated class for the Transations page.
  *
@@ -19,6 +22,20 @@ export class Transations {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Transations');
+
+    /** Ejemplo cargando una transaccion de ejemplo */
+    let transaction = new Transaction(20,"Primera Transaccion");
+    transaction.save();
+
+    this.loadTransactionsIndexBD();
+  }
+
+  /** Cargaras todas las transacciones locales "de indexDB" */
+  loadTransactionsIndexBD(){
+    Transaction.all().then( (resultados)=>{
+        this.transactions=resultados;
+        console.log(this.transactions);
+      });
   }
 
 }
