@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage } from '../pages/tabs/tabs';
 
 /** importamos Model BD */
-import db from '../database';
+//import {db} from '../database';
 
 
 @Component({

@@ -9,10 +9,21 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 
 
-import { Transations } from '../pages/transations/transations';
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+
+
+import { Geolocation } from '@ionic-native/geolocation';
+import { Camera } from '@ionic-native/camera';
+
+
+// Pagina "componentes" propios
+import { Transations } from '../pages/transations/transations';
+import { Adding } from '../pages/adding/adding';
+
+import { GeolocationService } from '../services/geolocation.service';
+import { Map } from '../pages/map/map';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +33,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     TabsPage,
 
-    Transations
+    Transations,
+    Adding,
+    Map
   ],
   imports: [
     BrowserModule,
@@ -36,9 +49,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     TabsPage, 
 
-    Transations
+    Transations,
+    Adding,
+    Map
   ],
   providers: [
+    Geolocation,
+    Camera,
+    GeolocationService,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

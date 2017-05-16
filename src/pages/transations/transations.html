@@ -7,16 +7,28 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Movimientos</ion-title>
+    <ion-title>{{title}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-	<h1>bienvenidos</h1>
-	<ion-card>
-		
-	</ion-card>
+  <h2>Bienvenido</h2>
+  <ion-card>
+    <ion-card-header>Movimientos</ion-card-header>
+    <ion-list *ngFor="let transaction of transactions">
+      <button ion-item>
+        <strong>{{transaction.amount}}</strong>
+        {{transaction.title}}
+      </button>
+    </ion-list>
+  </ion-card>
+  
+  <!--  Agrega una nueva pagina al stack 
+  apoyandose de component "myAddingPage = AddingPage"  -->
+  <ion-fab>
+    <button ion-fab [navPush]="myAddingPage">+</button>
+  </ion-fab>
 
 </ion-content>

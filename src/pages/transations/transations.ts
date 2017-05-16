@@ -2,13 +2,11 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import {Transaction} from '../../database';
+import { Adding as AddingPage } from '../adding/adding';
 
 
-/**
- * Generated class for the Transations page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
+/** 
+ * > ionic g page Transations
  */
 @IonicPage()
 @Component({
@@ -17,10 +15,20 @@ import {Transaction} from '../../database';
 })
 export class Transations {
 
+  public title:string = "Transacciones";
+  public transactions:any;
+
+  /** propiedad para agregar una nueva vista por arriva de esta [navPush]="myAddingPage" */
+  public myAddingPage = AddingPage;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
+
+  /* ionViewDidLoad Carga la vista cuando carga por primera vez
+  y
+  ionicViewWillEnter carga pagina cuando regresa y cuando entran por primera vez */
+  ionicViewWillEnter() {
     console.log('ionViewDidLoad Transations');
 
     /** Ejemplo cargando una transaccion de ejemplo */
