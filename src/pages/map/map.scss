@@ -1,3 +1,9 @@
-page-map {
 
+page-map {
+    
+	/**  Viewport  width y height */
+    #map{
+        width: 100vw;
+        height: calc(100vh - 125px);
+    }
 }

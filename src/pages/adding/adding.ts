@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 
 
 import { Transaction } from '../../database';
-import { GeolocationService } from '../../services/geolocation.service';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+
+import { GeolocationService } from '../../services/geolocation.service';
+import { Geolocation } from '@ionic-native/geolocation';
+
 
 /**
  * > ionic g page Adding
@@ -16,18 +19,24 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 })
 export class Adding {
 
-	//model: Transaction;
-	model :Transaction = new Transaction(null, "");
-	shouldGeolocate: boolean = false;
+	//transactionModel: Transaction;
+	transactionModel :Transaction = new Transaction(null, "");
+	shouldGeolocateMe: boolean = false;
 	shouldSend: boolean = true;
 	imageData: string;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, 
-		private camera: Camera, public geolocator: GeolocationService) {
+	constructor(
+		public navCtrl: NavController, 
+		public navParams: NavParams,
+		private camera: Camera, 
+		private geolocator: GeolocationService, 
+		private platform: Platform,
+		private geolocation: Geolocation) {
 	}
 
+
 	ionViewDidLoad() {
-		this.model = new Transaction(null,"");
+		this.transactionModel = new Transaction(null,"");
 	}
 
 	getPhoto(){
@@ -44,38 +53,50 @@ export class Adding {
 		this.camera.getPicture(cameraOptions).then((imageData)=>{
 			let base64Image = 'data:image/jpeg;base64,'+imageData;
 			this.imageData=base64Image;
-			this.model.imageUrl=this.imageData;
+			this.transactionModel.imageUrl=this.imageData;
 		}).catch((err)=>console.log(err));
 	}
 
 	getLocation(){
 		this.shouldSend=false;
-		
-		if(this.shouldGeolocate){
 
-			this.geolocator.get().then( (resultado)=>{
+		if(this.shouldGeolocateMe){
 
-				this.model.setCoords(resultado.coords);
+			/** Problemas con Geolocation */
+			this.geolocator.myPosition().then( (pos)=>{
+				this.transactionModel.setCoords(pos.coords);
 
-				console.log(this.model);
+				console.log(this.transactionModel);
 				this.shouldSend=true;
-				//console.log(resultado.coords.latitude);
-			}).catch((err)=>console.log(err));
-		
+				//console.log(pos.coords.latitude);
+			}).catch( (err)=>{
+				console.log(err);
+
+				/** Problemas con Geolocation */
+		        navigator.geolocation.getCurrentPosition( (pos)=>{
+					this.transactionModel.setCoords(pos.coords);
+
+					console.log(this.transactionModel);
+					this.shouldSend=true;
+					//console.log(pos.coords.latitude);
+		        })
+			});
+
+
 		}else{
-			this.model.cleanCoords();
+			this.transactionModel.cleanCoords();
 			this.shouldSend=true;
-			console.log(this.model);
+			console.log(this.transactionModel);
 		}
 	}
 
 	save(){
 		if(this.shouldSend){
-			this.model.save().then( result => {
-			this.model = new Transaction(null,"");
+			this.transactionModel.save().then( result => {
+				this.transactionModel = new Transaction(null,"");
 
-			// Quito esta vista de la pila "stack", regreso a vista Transation
-			this.navCtrl.pop();
+				// Quito esta vista de la pila "stack", regreso a vista Transation
+				this.navCtrl.pop();
 			});
 		}
 	}

@@ -12,9 +12,11 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-
-import { Geolocation } from '@ionic-native/geolocation';
+// ionic nativo
+// 
 import { Camera } from '@ionic-native/camera';
+import { Geolocation } from '@ionic-native/geolocation';
+import { GoogleMaps } from '@ionic-native/google-maps';
 
 
 // Pagina "componentes" propios
@@ -47,7 +49,7 @@ import { Map } from '../pages/map/map';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage, 
+    TabsPage,
 
     Transations,
     Adding,
@@ -55,6 +57,7 @@ import { Map } from '../pages/map/map';
   ],
   providers: [
     Geolocation,
+    GoogleMaps,
     Camera,
     GeolocationService,
     StatusBar,

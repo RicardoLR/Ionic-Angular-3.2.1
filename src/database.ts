@@ -9,7 +9,7 @@ export class TransactionAppDB extends Dexie{
 
     constructor(){    
         // nombre de BD
-        super("TransaccionesDB");
+        super("TransDB");
 
         this.version(1).stores({
             transactions: '++id,amount,lat,lng,title,imageUrl'

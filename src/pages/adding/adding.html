@@ -12,17 +12,17 @@
   
   <ion-item>
     <ion-label floating>Descripcion</ion-label>
-    <ion-input type="text" [(ngModel)]="model.title"></ion-input>
+    <ion-input type="text" [(ngModel)]="transactionModel.title"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label floating>Monto Gastado</ion-label>
-    <ion-input type="number" [(ngModel)]="model.amount"></ion-input>
+    <ion-input type="number" [(ngModel)]="transactionModel.amount"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label>Guardar Ubicacion</ion-label>
-    <ion-toggle [(ngModel)]="shouldGeolocate" (ionChange)="getLocation()"></ion-toggle>
+    <ion-toggle [(ngModel)]="shouldGeolocateMe" (ionChange)="getLocation()"></ion-toggle>
   </ion-item>
 
   <img [src]="imageData" *ngIf="imageData">
@@ -33,6 +33,11 @@
     </button>
   </div>
   
+  <!-- Desde component se utilizan banderas:
+    shouldGeolocateMe
+    shouldSend
+
+  Podriamos usar un form de angular y genera un codigo mas limpio -->
   <div class="actions">
     <button ion-button (click)="save()" [disabled]="!shouldSend">Agregar</button>
   </div>

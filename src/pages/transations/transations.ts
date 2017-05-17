@@ -21,6 +21,7 @@ export class Transations {
   /** propiedad para agregar una nueva vista por arriva de esta [navPush]="myAddingPage" */
   public myAddingPage = AddingPage;
 
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
@@ -28,7 +29,7 @@ export class Transations {
   /* ionViewDidLoad Carga la vista cuando carga por primera vez
   y
   ionicViewWillEnter carga pagina cuando regresa y cuando entran por primera vez */
-  ionicViewWillEnter() {
+  ionViewWillEnter() {
     console.log('ionViewDidLoad Transations');
 
     /** Ejemplo cargando una transaccion de ejemplo */
