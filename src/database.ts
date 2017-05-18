@@ -24,8 +24,7 @@ export class TransactionAppDB extends Dexie{
         });
 
         this.version(3).stores({
-            transactions: '++id,amount,lat,lng,title,imageUrl, 
-            ',
+            transactions: '++id,amount,lat,lng,title,imageUrl,walletId',
             wallets: '++id,amount,name'
         });
 
@@ -112,10 +111,14 @@ export class Transaction implements ITransaction{
 
     /**
     @return Promisse */
-    static all(){
+    static all( walletID ){
         //Transaction.all() => Todas las transacciones
         //retorna un Promise
-        return db.transactions.orderBy("id").reverse().toArray();
+        return db.transactions
+            .where("walletId")
+            .equals(walletID)
+            .reverse()
+            .toArray();
     }
 
 }

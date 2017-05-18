@@ -6,6 +6,7 @@ import { Adding as AddingPage } from '../adding/adding';
 
 
 import { WalletService } from '../../services/wallet.service';
+import { TransactionService } from '../../services/transaction.service';
 
 /** 
  * > ionic g page Transations
@@ -24,7 +25,8 @@ export class Transations {
   public myAddingPage = AddingPage;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private walletService :WalletService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+    private walletService :WalletService, private transactionService:TransactionService) {
   }
 
 
@@ -45,7 +47,7 @@ export class Transations {
 
   /** Cargaras todas las transacciones locales "de indexDB" */
   loadTransactionsIndexBD(){
-    Transaction.all().then( (resultados)=>{
+    this.transactionService.all().then( (resultados)=>{
       this.transactions=resultados;
       console.log(this.transactions);
     });

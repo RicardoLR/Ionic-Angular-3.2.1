@@ -104,10 +104,9 @@ export class Adding {
 		}
 	}
 
-
 	cleanTransaction():Transaction {
 		let transaction = new Transaction(null,"");
-		transaction.walletId = this.walletService.getStorageID;
+		transaction.walletId = this.walletService.getStorageID();
 
 		return transaction;				
 	}

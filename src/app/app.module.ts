@@ -25,9 +25,12 @@ import { Adding } from '../pages/adding/adding';
 import { Wallets } from '../pages/wallets/wallets';
 import { Map } from '../pages/map/map';
 
+import { NewWallet } from '../pages/new-wallet/new-wallet';
+
 
 import { GeolocationService } from '../services/geolocation.service';
 import { WalletService } from '../services/wallet.service';
+import { TransactionService } from '../services/transaction.service';
 
 
 @NgModule({
@@ -41,7 +44,8 @@ import { WalletService } from '../services/wallet.service';
     Transations,
     Adding,
     Map,
-    Wallets
+    Wallets,
+    NewWallet
   ],
   imports: [
     BrowserModule,
@@ -58,7 +62,8 @@ import { WalletService } from '../services/wallet.service';
     Transations,
     Adding,
     Map,
-    Wallets
+    Wallets,
+    NewWallet
   ],
   providers: [
     Geolocation,
@@ -66,6 +71,7 @@ import { WalletService } from '../services/wallet.service';
     Camera,
     GeolocationService,
     WalletService,
+    TransactionService,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

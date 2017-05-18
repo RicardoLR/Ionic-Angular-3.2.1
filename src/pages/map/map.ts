@@ -17,6 +17,7 @@ import {
 
 import { GeolocationService } from '../../services/geolocation.service';
 import { Transaction } from '../../database';
+import { TransactionService } from '../../services/transaction.service';
 
 
 /**
@@ -35,6 +36,7 @@ export class Map {
   	public navCtrl: NavController, 
   	public navParams: NavParams, 
   	private geolocator: GeolocationService, 
+  	private transactionService:TransactionService,
 
   	private platform: Platform,
     private geolocation: Geolocation,
@@ -110,7 +112,7 @@ export class Map {
   	se lo paso a mi funcion "loadTransactionMarkers" para recorrerlos y ponerlos en mapa con markers 
   */
   loadMarkers(){
-	Transaction.all().then( (results)=>this.loadTransactionMarkers(results) );
+	this.transactionService.all().then( (results)=>this.loadTransactionMarkers(results) );
   }
 
   loadTransactionMarkers(transactions){
