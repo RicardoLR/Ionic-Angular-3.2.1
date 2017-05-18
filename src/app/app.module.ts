@@ -22,9 +22,12 @@ import { GoogleMaps } from '@ionic-native/google-maps';
 // Pagina "componentes" propios
 import { Transations } from '../pages/transations/transations';
 import { Adding } from '../pages/adding/adding';
+import { Wallets } from '../pages/wallets/wallets';
+import { Map } from '../pages/map/map';
+
 
 import { GeolocationService } from '../services/geolocation.service';
-import { Map } from '../pages/map/map';
+import { WalletService } from '../services/wallet.service';
 
 
 @NgModule({
@@ -37,7 +40,8 @@ import { Map } from '../pages/map/map';
 
     Transations,
     Adding,
-    Map
+    Map,
+    Wallets
   ],
   imports: [
     BrowserModule,
@@ -53,13 +57,15 @@ import { Map } from '../pages/map/map';
 
     Transations,
     Adding,
-    Map
+    Map,
+    Wallets
   ],
   providers: [
     Geolocation,
     GoogleMaps,
     Camera,
     GeolocationService,
+    WalletService,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

@@ -5,8 +5,10 @@ import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { Transaction } from '../../database';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
-import { GeolocationService } from '../../services/geolocation.service';
 import { Geolocation } from '@ionic-native/geolocation';
+
+import { GeolocationService } from '../../services/geolocation.service';
+import { WalletService } from '../../services/wallet.service';
 
 
 /**
@@ -30,13 +32,14 @@ export class Adding {
 		public navParams: NavParams,
 		private camera: Camera, 
 		private geolocator: GeolocationService, 
+		private walletService :WalletService,
 		private platform: Platform,
 		private geolocation: Geolocation) {
 	}
 
 
 	ionViewDidLoad() {
-		this.transactionModel = new Transaction(null,"");
+		this.transactionModel = this.cleanTransaction();
 	}
 
 	getPhoto(){
@@ -93,7 +96,7 @@ export class Adding {
 	save(){
 		if(this.shouldSend){
 			this.transactionModel.save().then( result => {
-				this.transactionModel = new Transaction(null,"");
+				this.transactionModel = this.cleanTransaction();
 
 				// Quito esta vista de la pila "stack", regreso a vista Transation
 				this.navCtrl.pop();
@@ -102,4 +105,10 @@ export class Adding {
 	}
 
 
+	cleanTransaction():Transaction {
+		let transaction = new Transaction(null,"");
+		transaction.walletId = this.walletService.getStorageID;
+
+		return transaction;				
+	}
 }

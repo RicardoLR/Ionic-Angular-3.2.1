@@ -1,0 +1,34 @@
+<!--
+  Generated template for the Wallets page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title> My Wallets </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>	
+	
+	<ion-list>
+		<ion-list-header> Mis Gastos por carteras </ion-list-header>
+		
+		<ion-item *ngFor="let wallet of wallets">
+			<ion-avatar item-left>
+				<img src="assets/img/chequera.jpg">
+			</ion-avatar>
+			<h2> {{wallet.name}} </h2>
+			<h3> {{wallet.amount}} </h3>
+			<p>
+				<button ion-button clear> Seleccionar </button>
+				<button ion-button color="danger"> Eliminar </button>
+			</p>
+		</ion-item>
+	</ion-list>
+
+</ion-content>

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
-import { ContactPage } from '../contact/contact';
 
 
 import { Transations } from '../transations/transations';
 import { Map } from '../map/map';
+import { Wallets } from '../wallets/wallets';
 
 
 @Component({
@@ -14,7 +14,7 @@ export class TabsPage {
 
   tab1Root: any = Transations;
   tab2Root: any = Map;
-  tab3Root: any = ContactPage;
+  tab3Root: any = Wallets;
 
   constructor() {
 

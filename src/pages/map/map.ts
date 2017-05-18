@@ -106,7 +106,9 @@ export class Map {
 	});
   }
 
-
+  /** Pideo las transaction de mi BD y el resultado "result" y 
+  	se lo paso a mi funcion "loadTransactionMarkers" para recorrerlos y ponerlos en mapa con markers 
+  */
   loadMarkers(){
 	Transaction.all().then( (results)=>this.loadTransactionMarkers(results) );
   }

@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import {Transaction} from '../../database';
+import { Transaction } from '../../database';
 import { Adding as AddingPage } from '../adding/adding';
 
+
+import { WalletService } from '../../services/wallet.service';
 
 /** 
  * > ionic g page Transations
@@ -22,7 +24,7 @@ export class Transations {
   public myAddingPage = AddingPage;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private walletService :WalletService) {
   }
 
 
@@ -30,7 +32,9 @@ export class Transations {
   y
   ionicViewWillEnter carga pagina cuando regresa y cuando entran por primera vez */
   ionViewWillEnter() {
-    console.log('ionViewDidLoad Transations');
+    this.walletService.validateFirstWallet();
+    console.log( "this.walletService", this.walletService.getStorageID() );
+
 
     /** Ejemplo cargando una transaccion de ejemplo */
     let transaction = new Transaction(20,"Primera Transaccion");
@@ -42,9 +46,9 @@ export class Transations {
   /** Cargaras todas las transacciones locales "de indexDB" */
   loadTransactionsIndexBD(){
     Transaction.all().then( (resultados)=>{
-        this.transactions=resultados;
-        console.log(this.transactions);
-      });
+      this.transactions=resultados;
+      console.log(this.transactions);
+    });
   }
 
 }
