@@ -18,14 +18,18 @@
 	<ion-list>
 		<ion-list-header> Mis Gastos por carteras </ion-list-header>
 		
-		<ion-item *ngFor="let wallet of wallets">
+		<ion-item *ngFor="let wallet of wallets" 
+			[ngClass]="{'select-wallet': (wallet.id == walletService.getStorageID() )}" >
 			<ion-avatar item-left>
-				<img src="assets/img/chequera.jpg">
+				<img src="assets/imgs/chequera.jpg">
 			</ion-avatar>
 			<h2> {{wallet.name}} </h2>
 			<h3> {{wallet.amount}} </h3>
 			<p>
-				<button ion-button clear> Seleccionar </button>
+				<button ion-button clear (tap)="selectWallet(wallet)" 
+					[ngClass]="{'select-button-clear': (wallet.id == walletService.getStorageID() )}"> 
+					Seleccionar 
+				</button>
 				<button ion-button color="danger"> Eliminar </button>
 			</p>
 		</ion-item>

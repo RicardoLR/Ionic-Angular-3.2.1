@@ -34,14 +34,17 @@ export class Transations {
   y
   ionicViewWillEnter carga pagina cuando regresa y cuando entran por primera vez */
   ionViewWillEnter() {
-    this.walletService.validateFirstWallet();
-    console.log( "this.walletService", this.walletService.getStorageID() );
+
+    if( this.walletService.empty() ){
+      this.walletService.validateFirstWallet();
+      console.log( "this.walletService.getStorageID()", this.walletService.getStorageID() );
+    }
 
 
-    /** Ejemplo cargando una transaccion de ejemplo */
+    /** Ejemplo cargando una transaccion de ejemplo 
     let transaction = new Transaction(20,"Primera Transaccion");
     transaction.save();
-
+    */
     this.loadTransactionsIndexBD();
   }
 

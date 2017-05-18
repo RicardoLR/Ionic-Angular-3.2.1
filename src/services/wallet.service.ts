@@ -16,6 +16,12 @@ export class WalletService{
 		return parseInt( localStorage.getItem(StorageKey) );
 	}
 
+	/**  Apoyo para recargar validateFirstWallet(), cuando "seleccionando otra wallet en tab wallet"
+	@return boolean: true cuando no haya nada */
+	empty():boolean{
+		return !localStorage.getItem(StorageKey);
+	}
+
 	/**  Verifica que ya este instanciada la primera cartera
 	@return Promise */
 	public validateFirstWallet():any {
