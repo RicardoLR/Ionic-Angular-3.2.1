@@ -1,6 +1,6 @@
 
 .toolbar-background{
-	background-color: #1C1D21;
+	background-color: color($colors, primary);
 }
 
 .toolbar-title{
@@ -16,12 +16,12 @@ ion-fab.boton-material{
     right: 1em;
 
     button{
-        background-color: #6200EA;
+        background-color: color($colors, standOut);
         font-size: 1.5em !important;
     }
 }
 
 .actions{
     text-align: right;
-    margin-top: 20px; 
+    margin-top: 20px;
 }

@@ -9,6 +9,8 @@ import { Geolocation } from '@ionic-native/geolocation';
 
 import { GeolocationService } from '../../services/geolocation.service';
 import { WalletService } from '../../services/wallet.service';
+import { TransactionService } from '../../services/transaction.service';
+
 
 
 /**
@@ -27,12 +29,16 @@ export class Adding {
 	shouldSend: boolean = true;
 	imageData: string;
 
+	/* ingresos */
+	income:boolean = false;
+
 	constructor(
 		public navCtrl: NavController, 
 		public navParams: NavParams,
 		private camera: Camera, 
 		private geolocator: GeolocationService, 
 		private walletService :WalletService,
+		private transactionService:TransactionService,
 		private platform: Platform,
 		private geolocation: Geolocation) {
 	}
@@ -95,7 +101,13 @@ export class Adding {
 
 	save(){
 		if(this.shouldSend){
-			this.transactionModel.save().then( result => {
+
+			this.transactionModel.amount = this.convertAmountToINumber();
+
+			console.log("Adding save(): ", this.transactionModel);
+
+
+			this.transactionService.save( this.transactionModel ).then( result => {
 				this.transactionModel = this.cleanTransaction();
 
 				// Quito esta vista de la pila "stack", regreso a vista Transation
@@ -110,4 +122,16 @@ export class Adding {
 
 		return transaction;				
 	}
+
+	/** Manejo para que en DB sea intero 
+
+	Verifica si es un ingreso o un retiro */
+	convertAmountToINumber(){
+		let amount = parseInt(this.transactionModel.amount+"");
+		
+		if(!this.income) return amount=amount*-1;
+
+		return amount;
+	}
+
 }

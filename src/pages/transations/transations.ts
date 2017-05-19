@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { Transaction } from '../../database';
 import { Adding as AddingPage } from '../adding/adding';
 
+import { Wallet as WalletModel } from '../../database';
 
 import { WalletService } from '../../services/wallet.service';
 import { TransactionService } from '../../services/transaction.service';
 
 /** 
- * > ionic g page Transations
+ * > ionic g page Transations 
  */
 @IonicPage()
 @Component({
@@ -23,6 +23,8 @@ export class Transations {
 
   /** propiedad para agregar una nueva vista por arriva de esta [navPush]="myAddingPage" */
   public myAddingPage = AddingPage;
+
+  public myWalletActual :WalletModel = new WalletModel(0, "");
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
@@ -40,12 +42,9 @@ export class Transations {
       console.log( "this.walletService.getStorageID()", this.walletService.getStorageID() );
     }
 
-
-    /** Ejemplo cargando una transaccion de ejemplo 
-    let transaction = new Transaction(20,"Primera Transaccion");
-    transaction.save();
-    */
     this.loadTransactionsIndexBD();
+
+    this.loadWalletActual();
   }
 
   /** Cargaras todas las transacciones locales "de indexDB" */
@@ -53,6 +52,12 @@ export class Transations {
     this.transactionService.all().then( (resultados)=>{
       this.transactions=resultados;
       console.log(this.transactions);
+    });
+  }
+
+  loadWalletActual(){
+    this.walletService.getMainWallet().then( (wallet) =>{
+      this.myWalletActual = wallet;
     });
   }
 

@@ -18,6 +18,7 @@ import { Camera } from '@ionic-native/camera';
 import { Geolocation } from '@ionic-native/geolocation';
 import { GoogleMaps } from '@ionic-native/google-maps';
 
+import { Toast } from '@ionic-native/toast';
 
 // Pagina "componentes" propios
 import { Transations } from '../pages/transations/transations';
@@ -72,6 +73,7 @@ import { TransactionService } from '../services/transaction.service';
     GeolocationService,
     WalletService,
     TransactionService,
+    Toast,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

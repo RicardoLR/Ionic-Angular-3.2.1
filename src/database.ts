@@ -10,10 +10,10 @@ export class TransactionAppDB extends Dexie{
 
     constructor(){    
         // nombre de BD
-        super("TransDB");
+        super("TransactiDB");
 
         /* Tener en cuenta versiones anteriores estando en Produccion */
-        this.version(1).stores({
+        /*this.version(1).stores({
             transactions: '++id,amount,lat,lng,title,imageUrl',
             wallets: '++id,amount,name'
         });
@@ -22,11 +22,13 @@ export class TransactionAppDB extends Dexie{
             transactions: '++id,amount,lat,lng,title,imageUrl',
             wallets: '++id,amount,name'
         });
+        */
 
-        this.version(3).stores({
+        this.version(1).stores({
             transactions: '++id,amount,lat,lng,title,imageUrl,walletId',
             wallets: '++id,amount,name'
         });
+
 
         this.transactions.mapToClass(Transaction);
         this.wallets.mapToClass(Wallet);
@@ -134,10 +136,6 @@ export class Wallet implements IWallet{
         if(id) this.id=id;
     }
 
-    save(){
-        return db.wallets.add(this);
-    }
-
     /** @return One Objet Wallet */
     static getFirst(){
         return db.wallets.orderBy("id").limit(1).first();
@@ -148,6 +146,27 @@ export class Wallet implements IWallet{
         let wallet = new Wallet(0, "Cartera Principal");
         return wallet.save();
     }
+
+
+    save(){
+        return db.wallets.add(this);
+    }
+
+    static find(id:number){
+        return db.wallets.get(id);
+    }
+
+    /** update de dexie pasando json con paramaretros a actualizar */
+    static update(id:number, newAmount:number){
+        return db.wallets.update(id, { amount:newAmount } );
+    }
+
+    /** Elimina toda la cartera por ende "this.id" */ 
+    destroy(){
+        return db.wallets.delete(this.id);
+    }
+
+
 
     /**
     @return Promisse */

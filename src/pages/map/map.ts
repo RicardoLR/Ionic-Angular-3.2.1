@@ -13,10 +13,7 @@ import {
 } from '@ionic-native/google-maps';
 
 
-//import { GoogleMapsLatLng, GoogleMapsMarkerOptions, GoogleMapsMarker } from 'ionic-native';
-
 import { GeolocationService } from '../../services/geolocation.service';
-import { Transaction } from '../../database';
 import { TransactionService } from '../../services/transaction.service';
 
 

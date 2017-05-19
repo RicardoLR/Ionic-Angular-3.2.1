@@ -26,6 +26,7 @@
     "@ionic-native/google-maps": "^3.8.1",
     "@ionic-native/splash-screen": "3.7.0",
     "@ionic-native/status-bar": "3.7.0",
+    "@ionic-native/toast": "^3.9.2",
     "@ionic/storage": "2.0.1",
     "dexie": "^1.5.1",
     "ionic-angular": "3.2.1",

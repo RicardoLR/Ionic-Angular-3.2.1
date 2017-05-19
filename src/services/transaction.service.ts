@@ -21,5 +21,15 @@ export class TransactionService{
 		return Transaction.all( this.walletService.getStorageID() );
 	}
 
+	/** @return Promise [transactionPromise, walletUpdatePromise] */
+	save(transaction:Transaction):any{
+		console.log("transaction save(transaction): ", transaction);
+
+		let transactionPromise = transaction.save();
+
+		let walletUpdatePromise = this.walletService.update(transaction.amount);
+
+		return Promise.all( [transactionPromise, walletUpdatePromise] );
+	}
 
 }

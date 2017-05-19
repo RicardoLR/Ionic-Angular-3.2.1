@@ -12,9 +12,9 @@ import { Wallets } from '../wallets/wallets';
 })
 export class TabsPage {
 
-  tab1Root: any = Transations;
-  tab2Root: any = Map;
-  tab3Root: any = Wallets;
+  tab1Root: any = Wallets;
+  tab2Root: any = Transations;
+  tab3Root: any = Map;
 
   constructor() {
 

@@ -1,10 +1,53 @@
 
 page-adding {
 
+	transition: all 0.4s;
+
     img{
         height: 90px;
         border: solid 1px #eee;
         margin-left: 1em;
         margin-top: 1em;
     }
+
+    .red{
+		background-color: #FF8A80;
+    }
+
+    .amount-field{
+		padding	: 2em;
+		input{
+			font-size: 2em;
+			background-color: transparent;
+			border: none;
+			outline: none;
+			color: black;
+    		border-radius: 25px;
+		}
+		
+		/** change color of placeholder */
+		::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+		    color: black;
+		}
+		:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+		   color: black;
+		   opacity:  1;
+		}
+		::-moz-placeholder { /* Mozilla Firefox 19+ */
+		   color: black;
+		   opacity:  1;
+		}
+		:-ms-input-placeholder { /* Internet Explorer 10-11 */
+		   color: black;
+		}
+		::-ms-input-placeholder { /* Microsoft Edge */
+		   color: black;
+		}
+
+    }
+
+	.select-income{
+		background-color: #B9F6CA;	
+	}
+
 }

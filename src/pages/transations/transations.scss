@@ -1,5 +1,29 @@
 page-transations {
 
+
+	.monto{
+		padding: 1em;
+		text-align: center;
+		background-color: color($colors, secondary);
+
+
+		p{
+			color:white !important;
+			font-size: 36px;
+			margin:0px;
+		}
+
+		.card-header-md{
+			padding: 0px;
+			color: white !important;
+			font-size: 12px;
+		}
+	}
+
+	.bold{
+		font-weight: bold;
+		font-size: 1em;
+		background-color: color($colors, tertiary);
+		color: color($colors, white);
+	}
 }
-
-

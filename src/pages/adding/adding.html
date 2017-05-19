@@ -2,37 +2,66 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Agregar Movimiento</ion-title>
+    <ion-title> Movimiento</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
   
+  <ion-item-divider>
+      <strong  *ngIf="!income"> Monto Gastado </strong>
+      <strong  *ngIf="income"> Abonar Monto </strong>
+  </ion-item-divider>
+
+  <ion-item>
+    <div class="red amount-field" [ngClass]="{'select-income': income }"> 
+      <input type="number" [(ngModel)]="transactionModel.amount" autofocus="true" placeholder="0">
+    </div>
+  </ion-item>
+
+
   <ion-item>
     <ion-label floating>Descripcion</ion-label>
-    <ion-input type="text" [(ngModel)]="transactionModel.title"></ion-input>
+    <ion-input type="text" maxlength="40" [(ngModel)]="transactionModel.title"></ion-input>
   </ion-item>
 
-  <ion-item>
-    <ion-label floating>Monto Gastado</ion-label>
-    <ion-input type="number" [(ngModel)]="transactionModel.amount"></ion-input>
-  </ion-item>
 
-  <ion-item>
-    <ion-label>Guardar Ubicacion</ion-label>
-    <ion-toggle [(ngModel)]="shouldGeolocateMe" (ionChange)="getLocation()"></ion-toggle>
-  </ion-item>
+  <div [hidden]="income">
 
-  <img [src]="imageData" *ngIf="imageData">
-  <div class="actions">
-    <button ion-button clear (click)="getPhoto()">
-      <ion-icon name="add"></ion-icon>
-      Agregar imagen
-    </button>
+    <ion-item>
+      <ion-label>Guardar Ubicacion</ion-label>
+      <ion-toggle [(ngModel)]="shouldGeolocateMe" (ionChange)="getLocation()"></ion-toggle>
+    </ion-item>
+
+
+    <img [src]="imageData" *ngIf="imageData">
+    <div class="actions">
+      <button ion-button clear (click)="getPhoto()">
+        <ion-icon name="add"></ion-icon>
+        Agregar imagen
+      </button>
+    </div>
+
   </div>
-  
+
+
+  <!-- ============================================ 
+    CARGAR/RECARGAR/ABONAR
+    Para manejo de gastos "income"  
+    ============================================ -->
+  <ion-item-divider>
+    Actualizar cartera
+  </ion-item-divider>
+
+  <ion-item>
+    <ion-label>Abonar ingreso</ion-label>
+    <ion-toggle [(ngModel)]="income" (ionChange)="getLocation()"></ion-toggle>  
+  </ion-item>
+
+
   <!-- Desde component se utilizan banderas:
     shouldGeolocateMe
     shouldSend

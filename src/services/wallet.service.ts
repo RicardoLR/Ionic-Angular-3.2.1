@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { Wallet, IWallet } from '../database';
+import { Wallet } from '../database';
 
 export const StorageKey = "WalletID";
 
@@ -15,6 +15,24 @@ export class WalletService{
 	getStorageID():number{
 		return parseInt( localStorage.getItem(StorageKey) );
 	}
+
+	getMainWallet():any{
+		return Wallet.find(this.getStorageID());
+	}
+
+	/** @return Promise [findPromise, updatePromise] */
+	update(amount:number){
+
+		let findPromise = this.getMainWallet();
+		
+		let updatePromise = findPromise.then( wallet=> {
+			Wallet.update(this.getStorageID(), (+wallet.amount) + (+amount)); // + convierte a entero preservando signo(+ -)
+		});
+
+		return Promise.all( [findPromise, updatePromise] );
+	}
+
+
 
 	/**  Apoyo para recargar validateFirstWallet(), cuando "seleccionando otra wallet en tab wallet"
 	@return boolean: true cuando no haya nada */
